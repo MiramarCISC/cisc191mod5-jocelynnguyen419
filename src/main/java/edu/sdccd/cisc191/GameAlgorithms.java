@@ -58,6 +58,18 @@ public class GameAlgorithms {
      * @return index of target, or -1 if not found
      */
     public static int findMatchIterative(int[] sortedMatchIds, int target) {
+        // replaced the loop created earlier with a more simpler for-loop
+        for (int i = 0; i < sortedMatchIds.length; i++) {
+            if (target == sortedMatchIds[i]) { 
+                return i; 
+            }
+        }
+
+    // this is actually a really interesting way to go through a loop, 
+    // and I never would have thought about it (I really like it!),
+    // but I feel like it's a really complicated way to go through an array
+    // that only really needs a simple for-loop for a linear search
+    /*
         int low = 0;
         int high = sortedMatchIds.length - 1;
 
@@ -71,7 +83,7 @@ public class GameAlgorithms {
             } else {
                 low = mid + 1;
             }
-        }
+        } */
 
         return -1;
     }
