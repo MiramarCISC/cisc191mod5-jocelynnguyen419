@@ -39,7 +39,8 @@ public class GameAlgorithms {
             return -1;
         }
 
-        int mid = (low + high) / 2;
+        int mid = low + (high - low) / 2;
+// changed to prevent overflows as int if high and low are large ints
 
         if (sortedMatchIds[mid] == target) {
             return mid;
@@ -116,8 +117,10 @@ public class GameAlgorithms {
      * @return number of connected walkable tiles
      */
     public static int countConnectedTilesIterative(char[][] map, int startRow, int startCol) {
+        if (isOutOfBounds(map, startRow, startCol) || map[startRow][startCol] != '.') return 0;
         Deque<CellPosition> stack = new ArrayDeque<>();
         pushNeighbor(stack, startRow, startCol);
+// changed so it checks right away if the tile is blocked or out of bounds and makes it more efficient
 
         int count = 0;
 
