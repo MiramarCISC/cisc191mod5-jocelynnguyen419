@@ -65,6 +65,7 @@ public class GameAlgorithms {
 
             // Improved midpoint calculation to avoid integer overflow
             int mid = low + (high - low) / 2;
+            int mid = (low + high) / 2;
 
             if (sortedMatchIds[mid] == target) {
                 return mid;
@@ -183,6 +184,16 @@ public class GameAlgorithms {
 
         return containsMatchHelper(node.getLeft(), cleanedTarget)
                 || containsMatchHelper(node.getRight(), cleanedTarget);
+        if (node == null) {
+            return false;
+        }
+
+        if (node.getMatchName().equals(target)) {
+            return true;
+        }
+
+        return containsMatchHelper(node.getLeft(), target)
+                || containsMatchHelper(node.getRight(), target);
     }
 
     /**
