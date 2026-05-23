@@ -62,6 +62,9 @@ public class GameAlgorithms {
         int high = sortedMatchIds.length - 1;
 
         while (low <= high) {
+
+            // Improved midpoint calculation to avoid integer overflow
+            int mid = low + (high - low) / 2;
             int mid = (low + high) / 2;
 
             if (sortedMatchIds[mid] == target) {
@@ -166,6 +169,21 @@ public class GameAlgorithms {
      * @return true if found, false otherwise
      */
     private static boolean containsMatchHelper(BracketNode node, String target) {
+
+        // Added null target validation
+        if (node == null || target == null) {
+            return false;
+        }
+
+        String cleanedTarget = target.trim();
+
+        // Improved comparison for cleaner matching
+        if (node.getMatchName().equalsIgnoreCase(cleanedTarget)) {
+            return true;
+        }
+
+        return containsMatchHelper(node.getLeft(), cleanedTarget)
+                || containsMatchHelper(node.getRight(), cleanedTarget);
         if (node == null) {
             return false;
         }
